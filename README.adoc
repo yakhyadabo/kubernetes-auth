@@ -1,0 +1,48 @@
+== Kubernetes RBAC Authentication
+
+=== Introduction
+
+https://www.strongdm.com/blog/kubernetes-rbac-role-based-access-control
+
+In Kubernetes, ClusterRoles and Roles define the actions a user can perform within a cluster or namespace, respectively. You can assign these roles to Kubernetes subjects (users, groups, or service accounts) with role bindings and cluster role bindings. Kubernetes allows you to configure custom roles or use default user-facing roles, including, but not limited to:
+
+*Cluster-admin:* This “superuser” can perform any action on any resource in a cluster. You can use this in a ClusterRoleBinding to grant full control over every resource in the cluster (and in all namespaces) or in a RoleBinding to grant full control over every resource in the respective namespace.
+
+*Admin:* This role permits unlimited read/write access to resources within a namespace. This role can create roles and role bindings within a particular namespace. It does not permit write access to the namespace itself.
+
+*Edit:* This role grants read/write access within a given Kubernetes namespace. It cannot view or modify roles or role bindings.
+
+*View:* This role allows read-only access within a given namespace. It does not allow viewing or modifying of roles or role bindings.
+
+https://learnk8s.io/rbac-kubernetes
+https://learnk8s.io/authentication-kubernetes#granting-access-to-the-cluster-to-external-users
+
+=== X.509 Client Certificate
+
+*KUBECONFIG:*
+https://spacelift.io/blog/kubeconfig
+
+**USERS: **
+All Kubernetes clusters have two categories of users: service accounts managed by Kubernetes, and normal users.
+
+It is assumed that a cluster-independent service manages normal users in the following ways:
+
+- an administrator distributing private keys
+- a user store like Keystone or Google Accounts
+- a file with a list of usernames and passwords
+
+In this regard, Kubernetes does not have objects which represent normal user accounts. Normal users cannot be added to a cluster through an API call.
+
+Even though a normal user cannot be added via an API call, any user that presents a valid certificate signed by the cluster's certificate authority (CA) is considered authenticated. In this configuration, Kubernetes determines the username from the common name field in the 'subject' of the cert (e.g., "/CN=bob").
+
+ If a client certificate is presented and verified, the common name of the subject is used as the user name for the request. As of Kubernetes 1.4, client certificates can also indicate a user's group memberships using the certificate's organization fields. To include multiple group memberships for a user, include multiple organization fields in the certificate.
+
+```
+$ openssl req -new -key jbeda.pem -out jbeda-csr.pem -subj "/CN=jbeda/O=app1/O=app2"
+
+```
+
+Certificates as User:
+https://anaisurl.com/kubernetes-rbac/
+
+=== OICD with Dex and LDAP
