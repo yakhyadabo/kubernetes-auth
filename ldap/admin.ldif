@@ -1,0 +1,8 @@
+dn: cn=admin,dc=yakhyadabo,dc=com
+objectClass: top
+objectClass: inetOrgPerson
+gn: Admin
+sn: Wonderland
+ou: admin
+cn: admin
+userPassword: adminpassword

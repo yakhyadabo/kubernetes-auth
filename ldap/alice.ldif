@@ -1,0 +1,8 @@
+dn: cn=alice,dc=yakhyadabo,dc=com
+objectClass: top
+objectClass: inetOrgPerson
+gn: Alice
+sn: Wonderland
+ou: admin
+cn: alice
+userPassword: alicepassword
