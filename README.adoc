@@ -1,6 +1,6 @@
-== Kubernetes RBAC Authentication
+= Kubernetes RBAC Authentication
 
-=== Introduction
+== Introduction
 
 https://www.strongdm.com/blog/kubernetes-rbac-role-based-access-control
 
@@ -17,7 +17,10 @@ In Kubernetes, ClusterRoles and Roles define the actions a user can perform with
 https://learnk8s.io/rbac-kubernetes
 https://learnk8s.io/authentication-kubernetes#granting-access-to-the-cluster-to-external-users
 
-=== X.509 Client Certificate
+== Static token file.
+Authentication with statically defined HTTP bearer tokens.
+
+== X.509 Client Certificate
 
 *KUBECONFIG:*
 https://spacelift.io/blog/kubeconfig
@@ -45,4 +48,16 @@ $ openssl req -new -key jbeda.pem -out jbeda-csr.pem -subj "/CN=jbeda/O=app1/O=a
 Certificates as User:
 https://anaisurl.com/kubernetes-rbac/
 
-=== OICD with Dex and LDAP
+== OpenID Connect Tokens
+
+=== OAuth 2.0
+
+=== OpenID Connect
+
+=== LDAP
+
+=== Dex
+
+== Service Account Token
+
+Authentication of requests made by Kubernetes service accounts.
